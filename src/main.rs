@@ -1,3 +1,5 @@
+use core::num;
+
 fn main() {
     println!("Welcome to the Rabbit University Safety Testing Suite (RUSTs)");
 
@@ -66,8 +68,20 @@ fn validate_simulation() {
 }
 
 /// Simulate the rabbit population
-fn simulate(_starting_rabbits: i128) -> i32 {
-    todo!()
+fn simulate(starting_rabbits: i128) -> i32 {
+    let mut number_rabbits = starting_rabbits;
+    let mut day_count = 0;
+    while number_rabbits > 1 {
+        if number_rabbits % 2 == 0 {
+            number_rabbits = number_rabbits/2;
+            day_count += 1;                             // Can't do day_count ++;
+        }
+        else {
+            number_rabbits = (3 * number_rabbits) + 1;
+            day_count += 1;
+        }
+    }
+    day_count
 }
 
 #[cfg(test)]
