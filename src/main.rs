@@ -19,6 +19,7 @@ fn validate_grading_system() {
     let grade = calculate_grade(carrots, nuts, seeds);
 
     assert!(grade == 240);
+    println!("{}", grade);  // how to print grade on terminal?
     println!("Validation complete ✅\n");
 }
 
@@ -41,6 +42,7 @@ fn validate_safety_system() {
         calculate_safety_status(wolves_nearby, day_time, has_carrot, friends_nearby);
 
     assert!(safety_status == true);
+    println!("{}", safety_status);  // how to print safety status on terminal?
     println!("Validation complete ✅\n");
 }
 
@@ -73,14 +75,14 @@ fn simulate(starting_rabbits: i128) -> i32 {
     let mut day_count = 0;
     while number_rabbits > 1 {
         if number_rabbits % 2 == 0 {
-            number_rabbits = number_rabbits/2;
-            day_count += 1;                             // Can't do day_count ++;
-        }
-        else {
+            number_rabbits = number_rabbits / 2;
+            day_count += 1; // Can't do day_count ++;
+        } else {
             number_rabbits = (3 * number_rabbits) + 1;
             day_count += 1;
         }
     }
+    println!("{}", day_count);      // prints day_count on terminal
     day_count
 }
 
