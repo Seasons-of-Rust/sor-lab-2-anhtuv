@@ -96,6 +96,12 @@ mod tests {
         assert_eq!(0, calculate_grade(0, 0, 0));
         assert_eq!(240, calculate_grade(10, 5, 1));
         assert_eq!(56, calculate_grade(3, 4, 1));
+
+        println!("{}", calculate_grade(5, 7, 2));
+        println!("{}", calculate_grade(0, 0, 0));
+        println!("{}", calculate_grade(10, 5, 1));
+        println!("{}", calculate_grade(3, 4, 1));
+        println!(" ");
     }
 
     #[test]
@@ -105,10 +111,20 @@ mod tests {
         assert_eq!(true, calculate_safety_status(false, true, false, 0));
         assert_eq!(true, calculate_safety_status(false, true, false, 4));
 
+        println!("{}", calculate_safety_status(false, true, true, 2));
+        println!("{}", calculate_safety_status(true, false, false, 0));
+        println!("{}", calculate_safety_status(false, true, false, 0));
+        println!("{}", calculate_safety_status(false, true, false, 4));
+        println!(" ");
+
         // From Jersey
         assert_eq!(true, calculate_safety_status(true, false, true, 0));
         assert_eq!(false, calculate_safety_status(true, false, false, 3));
         assert_eq!(true, calculate_safety_status(true, false, false, 4));
+
+        println!("{}", calculate_safety_status(true, false, true, 0));
+        println!("{}", calculate_safety_status(true, false, false, 3));
+        println!("{}", calculate_safety_status(true, false, false, 4));
     }
 
     #[test]
@@ -117,5 +133,6 @@ mod tests {
         assert_eq!(129, simulate(234_345));
         assert_eq!(34, simulate(39));
         assert_eq!(770, simulate(678_293_106_536_832_832_142));
+        // day_count printed in simulate() function
     }
 }
