@@ -1,3 +1,5 @@
+use core::num;
+
 fn main() {
     println!("Welcome to the Rabbit University Safety Testing Suite (RUSTs)");
 
@@ -17,12 +19,13 @@ fn validate_grading_system() {
     let grade = calculate_grade(carrots, nuts, seeds);
 
     assert!(grade == 240);
+    println!("{}", grade);  // how to print grade on terminal?
     println!("Validation complete ✅\n");
 }
 
 /// Calculate the grade
 fn calculate_grade(carrots: i32, nuts: i32, seeds: i32) -> i32 {
-    todo!()
+    (carrots + nuts) * (carrots + nuts + seeds)
 }
 
 /// Validate the safety system
@@ -39,6 +42,7 @@ fn validate_safety_system() {
         calculate_safety_status(wolves_nearby, day_time, has_carrot, friends_nearby);
 
     assert!(safety_status == true);
+    println!("{}", safety_status);  // how to print safety status on terminal?
     println!("Validation complete ✅\n");
 }
 
@@ -49,7 +53,7 @@ fn calculate_safety_status(
     has_carrot: bool,
     friends_nearby: i32,
 ) -> bool {
-    todo!()
+    (wolves_nearby == false && day_time == true) || has_carrot == true || friends_nearby > 3
 }
 
 /// Validate the simulation
@@ -67,7 +71,19 @@ fn validate_simulation() {
 
 /// Simulate the rabbit population
 fn simulate(starting_rabbits: i128) -> i32 {
-    todo!()
+    let mut number_rabbits = starting_rabbits;
+    let mut day_count = 0;
+    while number_rabbits > 1 {
+        if number_rabbits % 2 == 0 {
+            number_rabbits = number_rabbits / 2;
+            day_count += 1; // Can't do day_count ++;
+        } else {
+            number_rabbits = (3 * number_rabbits) + 1;
+            day_count += 1;
+        }
+    }
+    println!("{}", day_count);      // prints day_count on terminal
+    day_count
 }
 
 #[cfg(test)]
@@ -80,6 +96,12 @@ mod tests {
         assert_eq!(0, calculate_grade(0, 0, 0));
         assert_eq!(240, calculate_grade(10, 5, 1));
         assert_eq!(56, calculate_grade(3, 4, 1));
+
+        println!("{}", calculate_grade(5, 7, 2));
+        println!("{}", calculate_grade(0, 0, 0));
+        println!("{}", calculate_grade(10, 5, 1));
+        println!("{}", calculate_grade(3, 4, 1));
+        println!(" ");
     }
 
     #[test]
@@ -89,10 +111,20 @@ mod tests {
         assert_eq!(true, calculate_safety_status(false, true, false, 0));
         assert_eq!(true, calculate_safety_status(false, true, false, 4));
 
+        println!("{}", calculate_safety_status(false, true, true, 2));
+        println!("{}", calculate_safety_status(true, false, false, 0));
+        println!("{}", calculate_safety_status(false, true, false, 0));
+        println!("{}", calculate_safety_status(false, true, false, 4));
+        println!(" ");
+
         // From Jersey
         assert_eq!(true, calculate_safety_status(true, false, true, 0));
         assert_eq!(false, calculate_safety_status(true, false, false, 3));
         assert_eq!(true, calculate_safety_status(true, false, false, 4));
+
+        println!("{}", calculate_safety_status(true, false, true, 0));
+        println!("{}", calculate_safety_status(true, false, false, 3));
+        println!("{}", calculate_safety_status(true, false, false, 4));
     }
 
     #[test]
@@ -101,5 +133,6 @@ mod tests {
         assert_eq!(129, simulate(234_345));
         assert_eq!(34, simulate(39));
         assert_eq!(770, simulate(678_293_106_536_832_832_142));
+        // day_count printed in simulate() function
     }
 }
